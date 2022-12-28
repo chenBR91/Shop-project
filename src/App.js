@@ -1,23 +1,39 @@
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react'
 import './App.css';
+import Nav from './components/Nav/Nav';
+import Products from './components/Products/Products';
+import allProducts from './data/data.js'
+
 
 function App() {
+  const [itemCollection, setItemCollection] = useState({});
+  const [products, setProducts] = useState(allProducts)
+
+
+  const handleChangeFilter=(e)=>{
+    setItemCollection({value:e.target.value});
+    updateFilterByCollection();
+  }
+
+
+  const updateFilterByCollection=()=>{
+    console.log('itemCollection', itemCollection);
+    if(itemCollection.value ==='all Products'){
+      setProducts(allProducts);
+      console.log('all products!!!');
+    }else {
+      const arrFilterByCollection = allProducts.filter((product)=>product.category===itemCollection.value)
+      setProducts(arrFilterByCollection);
+      console.log('arrFilterByCollection', arrFilterByCollection);
+    }
+  
+  }
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Nav handleChangeFilter={handleChangeFilter}/>
+      <Products allProducts={products}/>
     </div>
   );
 }

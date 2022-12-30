@@ -13,6 +13,7 @@ function Products({allProducts, handleAddToCart}) {
              imageUrl={product.image} 
              title={product.title} 
              price={product.price}
+             id={product.id}
              handleAddToCart={handleAddToCart}
             />
         )}

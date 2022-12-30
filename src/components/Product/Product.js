@@ -1,9 +1,9 @@
 import React from 'react'
 import AddCart from '../Carts/AddCart'
-import ProductDetail from '../ProductDetail/ProductDetail'
+import ViewButton from '../ViewButton/ViewButton'
 import './product.css'
 
-function Product({imageUrl, title, price, handleAddToCart}) {
+function Product({imageUrl, title, price, id, handleAddToCart}) {
   return (
     
     <div className="product-card">
@@ -17,7 +17,7 @@ function Product({imageUrl, title, price, handleAddToCart}) {
           <h6>${price}</h6>
         </div>
         <div className='product-btn'>
-          <ProductDetail bgcolor={'rgb(224, 133, 59)'}>View</ProductDetail>
+          <ViewButton bgcolor={'rgb(224, 133, 59)'}>View {id}</ViewButton>
           <AddCart handleAddToCart={handleAddToCart} bgcolor={'rgb(107, 180, 107)'}>Add to cart</AddCart>
         </div>
     </div>

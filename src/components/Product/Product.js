@@ -3,7 +3,7 @@ import AddCart from '../Carts/AddCart'
 import ProductDetail from '../ProductDetail/ProductDetail'
 import './product.css'
 
-function Product({imageUrl, title, price}) {
+function Product({imageUrl, title, price, handleAddToCart}) {
   return (
     
     <div className="product-card">
@@ -18,7 +18,7 @@ function Product({imageUrl, title, price}) {
         </div>
         <div className='product-btn'>
           <ProductDetail bgcolor={'rgb(224, 133, 59)'}>View</ProductDetail>
-          <AddCart bgcolor={'rgb(107, 180, 107)'}>Add to cart</AddCart>
+          <AddCart handleAddToCart={handleAddToCart} bgcolor={'rgb(107, 180, 107)'}>Add to cart</AddCart>
         </div>
     </div>
     

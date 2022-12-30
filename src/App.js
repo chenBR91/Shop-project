@@ -8,6 +8,9 @@ import allProducts from './data/data.js'
 function App() {
   const [itemCollection, setItemCollection] = useState({});
   const [products, setProducts] = useState([])
+  const [counterCartItems, setCounterCartItems] = useState(0);
+  const [productsInCart, setProductsInCart] = useState([]);
+
   let countAttemptLoadProducts = 0;
   let eventFilterBy = '';
 
@@ -53,11 +56,15 @@ function App() {
   
   }
 
+  const handleAddToCart=(item)=>{
+    console.log('handleAddToCart item=',item);
+    setCounterCartItems(counterCartItems+item);
+  }
   
   return (
     <div>
-      <Nav handleChangeFilter={handleChangeFilter}/>
-      <Products allProducts={products}/>
+      <Nav handleChangeFilter={handleChangeFilter} counterCartItems={counterCartItems}/>
+      <Products allProducts={products} handleAddToCart={handleAddToCart}/>
     </div>
   );
 }

@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
+import CounterItemsCart from '../Carts/CounterItemsCart';
 import FilterBy from '../FilterBy/FilterBy';
 import SortBy from '../SortBy/SortBy'
 import './nav.css';
 
-function Nav({handleChangeFilter}) {
+function Nav({handleChangeFilter, counterCartItems}) {
     
   return (
     <>
@@ -11,6 +12,7 @@ function Nav({handleChangeFilter}) {
             <h1>Jackets</h1>
 
             <div className="sort">
+                <CounterItemsCart counterCartItems={counterCartItems}/>
                 <FilterBy handleChangeFilter={handleChangeFilter}/>
                 <SortBy />
             </div>

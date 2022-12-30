@@ -2,7 +2,7 @@ import React from 'react'
 import Product from '../Product/Product'
 
 
-function Products({allProducts}) {
+function Products({allProducts, handleAddToCart}) {
   return (
     <>
         <section className="products">
@@ -13,6 +13,7 @@ function Products({allProducts}) {
              imageUrl={product.image} 
              title={product.title} 
              price={product.price}
+             handleAddToCart={handleAddToCart}
             />
         )}
 

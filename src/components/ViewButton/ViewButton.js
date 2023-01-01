@@ -1,12 +1,18 @@
 import React from 'react'
 import '../Carts/AddCart.css';
+import { Route, Routes, Link } from 'react-router-dom';
+import ProductDetail from '../../pages/ProductDetail/ProductDetail';
 
-function ProductDetail({children, bgcolor}) {
+function ViewButton({children, style, id, imageUrl, category, title}) {
   return (
     <>
-        <button className='btn-add-cart' style={{background:bgcolor}}>{children}</button>
+      <Link to={`/view/${id}`} state={{from: 'test state', imageUrl:imageUrl, title:title, category}} className='btn-add-cart' style={{background:style.bgColor, width:style.width}}>
+        {children}
+      </Link>
+
+      
     </>
   )
 }
 
-export default ProductDetail;
+export default ViewButton;

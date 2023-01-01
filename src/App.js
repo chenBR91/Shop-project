@@ -1,15 +1,18 @@
 import React, {useState, useEffect} from 'react'
 import './App.css';
 import Nav from './components/Nav/Nav';
-import Products from './components/Products/Products';
+// import Products from './components/Products/Products';
 import allProducts from './data/data.js'
-
+import About from './pages/About/About.js';
+import Home from './pages/Home/Home';
+import ProductDetail from './pages/ProductDetail/ProductDetail';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
   const [itemCollection, setItemCollection] = useState({});
   const [products, setProducts] = useState([])
   const [counterCartItems, setCounterCartItems] = useState(0);
-  const [productsInCart, setProductsInCart] = useState([]);
+  // const [productsInCart, setProductsInCart] = useState([]);
 
   let countAttemptLoadProducts = 0;
   let eventFilterBy = '';
@@ -62,10 +65,19 @@ function App() {
   }
   
   return (
-    <div>
-      <Nav handleChangeFilter={handleChangeFilter} counterCartItems={counterCartItems}/>
-      <Products allProducts={products} handleAddToCart={handleAddToCart}/>
-    </div>
+    <Router>
+      <div>
+        <Nav handleChangeFilter={handleChangeFilter} counterCartItems={counterCartItems}/>
+        
+        <Routes>
+          <Route path="/" element={<Home allProducts={products} handleAddToCart={handleAddToCart} />} />
+          <Route path="/nav" element={<Nav handleChangeFilter={handleChangeFilter} counterCartItems={counterCartItems}/>} />
+          <Route path="/about" element={<About />} />
+          <Route path="/view/:productId" element={<ProductDetail handleAddToCart={handleAddToCart}/>} />
+        </Routes>
+
+      </div>
+    </Router>
   );
 }
 

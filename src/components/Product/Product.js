@@ -3,7 +3,7 @@ import AddCart from '../Carts/AddCart'
 import ViewButton from '../ViewButton/ViewButton'
 import './product.css'
 
-function Product({imageUrl, title, price, category, id, handleAddToCart}) {
+function Product({imageUrl, title, price, category, id}) {
   return (
     
     <div className="product-card">
@@ -18,8 +18,8 @@ function Product({imageUrl, title, price, category, id, handleAddToCart}) {
           <h6>${price}</h6>
         </div>
         <div className='product-btn'>
-          <ViewButton imageUrl={imageUrl} title={title} category={category} id={id} style={{bgColor:'rgb(224, 133, 59)', width: '45%'}}>View {id}</ViewButton>
-          <AddCart handleAddToCart={handleAddToCart} style={{bgColor: 'rgb(107, 180, 107)', width: '45%'}}>Add to cart</AddCart>
+          {/* <ViewButton imageUrl={imageUrl} title={title} category={category} id={id} style={{bgColor:'rgb(224, 133, 59)', width: '45%'}}>View {id}</ViewButton>
+          <AddCart handleAddToCart={handleAddToCart} style={{bgColor: 'rgb(107, 180, 107)', width: '45%'}}>Add to cart</AddCart> */}
         </div>
     </div>
     

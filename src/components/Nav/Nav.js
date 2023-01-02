@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import CounterItemsCart from '../Carts/CounterItemsCart';
 import FilterBy from '../FilterBy/FilterBy';
 import SortBy from '../SortBy/SortBy'
 import './nav.css';
 
-function Nav({handleChangeFilter, counterCartItems}) {
-    
+
+function Nav() {
+  
   return (
     <>
       <nav className="product-filter">
@@ -19,8 +20,8 @@ function Nav({handleChangeFilter, counterCartItems}) {
           
 
           <div className="sort">
-              <CounterItemsCart counterCartItems={counterCartItems}/>
-              <FilterBy handleChangeFilter={handleChangeFilter}/>
+              {/* <CounterItemsCart counterCartItems={counterCartItems}/> */}
+              <FilterBy />
               <SortBy />
           </div>
       </nav>

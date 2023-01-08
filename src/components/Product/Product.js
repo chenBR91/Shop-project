@@ -1,25 +1,33 @@
-import React from 'react'
+import React, {useContext, useState} from 'react'
 import AddCart from '../Carts/AddCart'
-import ViewButton from '../ViewButton/ViewButton'
+import { Link } from 'react-router-dom'
 import './product.css'
+//import CartProductsContext from '../../CartProductsContext'
+import ProductsContext from '../../ProductsContext'
 
-function Product({imageUrl, title, price, category, id}) {
-  return (
-    
+function Product({imageUrl, title, price, id, index, amount}) {
+
+  //const { amount } = useContext(CartProductsContext);
+  const { allProducts } = useContext(ProductsContext)
+
+  return (  
     <div className="product-card">
         <div className="product-image">
-          <img
-              src={imageUrl}
-              alt={imageUrl}
-          />
+          <Link to={`products/${id}`}>
+            <img
+                src={imageUrl}
+                alt={imageUrl}
+            />
+          </Link>
         </div>
         <div className="product-info">
           <h5>{title}</h5>
           <h6>${price}</h6>
         </div>
         <div className='product-btn'>
-          {/* <ViewButton imageUrl={imageUrl} title={title} category={category} id={id} style={{bgColor:'rgb(224, 133, 59)', width: '45%'}}>View {id}</ViewButton>
-          <AddCart handleAddToCart={handleAddToCart} style={{bgColor: 'rgb(107, 180, 107)', width: '45%'}}>Add to cart</AddCart> */}
+          <AddCart situation={"increment"} id={id} style={{bgColor: 'rgb(107, 180, 107)', width: '45%'}}>Add to cart</AddCart>
+          <label>{amount}</label>
+          <AddCart situation={"decrement"} id={id} style={{bgColor: 'rgb(190, 000, 107)', width: '45%'}}>Delete</AddCart>
         </div>
     </div>
     

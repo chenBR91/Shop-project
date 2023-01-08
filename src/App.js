@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import ProductsContext from './ProductsContext';
 import StoreContext from './StoreContext';
+import CartProductsContext from './CartProductsContext';
 import './App.css';
 import Nav from './components/Nav/Nav';
-import allProducts from './data/data.js'
 import About from './pages/About/About.js';
 import Home from './pages/Home/Home';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Products from './components/Products/Products';
+import QueryUrl from './pages/Further/QueryUrl';
 
 function App() {
   const [itemCollection, setItemCollection] = useState({});
@@ -16,7 +16,9 @@ function App() {
   const [counterCartItems, setCounterCartItems] = useState(0);
   const [category, setCategory] = useState('all Products');
   const [sort, setSort] = useState(null);
-
+  const [amount, setAmount] = useState(0);
+  const [listProductInCart, setListProductInCart] = useState([]) 
+  
   let countAttemptLoadProducts = 0;
 
   useEffect(()=>{
@@ -40,35 +42,52 @@ function App() {
     }
   }
 
+  // Add amount to products
+  const productsWithAmount = products.map((ans)=> ( {...ans, 'amount': 0} ))
   
+  useEffect(()=>{
+    console.log('listProductInCart', listProductInCart);
+  },[listProductInCart])
+  
+
   const storeValues = {
     category,
     setCategory,
     sort,
     setSort,
-    counterCartItems,
   }
 
-  const productsValue = {allProducts: products, setProducts}
+  const productsValue = {
+    allProducts: productsWithAmount, 
+    setProducts};
+
+  const cartValue = {
+    listProductInCart, 
+    setListProductInCart, 
+    amount, 
+    setAmount };
+
 
   return (
-    <StoreContext.Provider value={storeValues}>
-      <ProductsContext.Provider value={productsValue}>
-        <Router>
-          <div>
-            <Nav />
-            <Products />
+    <Router>
+      <StoreContext.Provider value={storeValues}>
+        <ProductsContext.Provider value={productsValue}>
+          <CartProductsContext.Provider value={cartValue}>
+            
+            <div>
+              <Nav />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/products/:productId" element={<ProductDetail />} />
+                <Route path="/query" element={<QueryUrl />} />
+              </Routes>
+            </div>
 
-            <Routes>
-              {/* <Route path="/" element={<Home allProducts={products} handleAddToCart={handleAddToCart} />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/view/:productId" element={<ProductDetail handleAddToCart={handleAddToCart}/>} /> */}
-            </Routes>
-
-          </div>
-        </Router>
-      </ProductsContext.Provider>
-    </StoreContext.Provider>
+          </CartProductsContext.Provider>
+        </ProductsContext.Provider>
+      </StoreContext.Provider>
+    </Router>
   );
 }
 

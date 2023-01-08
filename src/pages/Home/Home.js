@@ -1,11 +1,13 @@
 import React from 'react'
 import Products from '../../components/Products/Products';
+import useQueryUrl from '../../components/Hook/useQueryUrl';
 
-function Home({allProducts, handleAddToCart}) {
-
+function Home() {
+  useQueryUrl();
+  
   return (
     <div>
-        <Products allProducts={allProducts} handleAddToCart={handleAddToCart}/>
+        <Products />
     </div>
   )
 }

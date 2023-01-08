@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import '../FilterBy/FilterBy.css';
 import { FiShoppingCart } from "react-icons/fi";
+import StoreContext from '../../StoreContext';
 
-function CounterItemsCart({counterCartItems}) {
+function CounterItemsCart() {
+  const { counterCartItems } = useContext(StoreContext)
 
   return (
     <div className="collection-sort">
         <label>Cart:</label>
-        <div>{counterCartItems}<FiShoppingCart/></div>
+        <div>{ counterCartItems }<FiShoppingCart/></div>
         
     </div>
   )

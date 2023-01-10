@@ -1,20 +1,28 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Product from '../Product/Product'
+import ProductsContext from '../../ProductsContext'
+import StoreContext from '../../StoreContext';
+import CartProductsContext from '../../CartProductsContext';
 
-
-function Products({allProducts, handleAddToCart}) {
+function Products() {
+  const { allProducts } = useContext(ProductsContext);
+  const { category } = useContext(StoreContext);
+  
+  const filterArray = category === 'all Products' ? allProducts : allProducts.filter((filterProduct)=>filterProduct.category === category)
+  
   return (
     <>
         <section className="products">
-        
-        {allProducts.map((product, index)=>
+        {filterArray.map((product, index)=>
             <Product 
+             index={index}
              key={index}
              imageUrl={product.image} 
              title={product.title} 
              price={product.price}
+             category={product.category}
              id={product.id}
-             handleAddToCart={handleAddToCart}
+             amount={product.amount}
             />
         )}
 

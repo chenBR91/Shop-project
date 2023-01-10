@@ -1,30 +1,37 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react';
+import ProductsContext from './ProductsContext';
+import StoreContext from './StoreContext';
+import CartProductsContext from './CartProductsContext';
 import './App.css';
 import Nav from './components/Nav/Nav';
-import Products from './components/Products/Products';
-import allProducts from './data/data.js'
-
+import About from './pages/About/About.js';
+import Home from './pages/Home/Home';
+import ProductDetail from './pages/ProductDetail/ProductDetail';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import QueryUrl from './pages/Further/QueryUrl';
 
 function App() {
   const [itemCollection, setItemCollection] = useState({});
   const [products, setProducts] = useState([])
   const [counterCartItems, setCounterCartItems] = useState(0);
-  const [productsInCart, setProductsInCart] = useState([]);
-
+  const [category, setCategory] = useState('all Products');
+  const [sort, setSort] = useState(null);
+  const [amount, setAmount] = useState(0);
+  const [listProductInCart, setListProductInCart] = useState([]) 
+  
   let countAttemptLoadProducts = 0;
-  let eventFilterBy = '';
 
   useEffect(()=>{
     uploadProductsApi();
   },[])
 
   const uploadProductsApi = async() => {
+    const url = 'https://fakestoreapi.com/products'
     try{
-      const res = await fetch('https://fakestoreapi.com/products');
+      const res = await fetch(url);
       const answer = await res.json();
       setProducts(answer);
       countAttemptLoadProducts = 0;
-      console.log('Success');
     }catch(err){
       if(countAttemptLoadProducts < 3) {
         countAttemptLoadProducts++;
@@ -35,37 +42,52 @@ function App() {
     }
   }
 
-
-  const handleChangeFilter=(e)=>{
-    //eventFilterBy = e.target.value;
-    setItemCollection({value:e.target.value});
-    updateFilterByCollection();
-  }
-
-
-  const updateFilterByCollection=()=>{
-    console.log('itemCollection', itemCollection);
-    if(itemCollection.value ==='all Products'){
-      setProducts(allProducts);
-      console.log('all products!!!');
-    }else {
-      const arrFilterByCollection = allProducts.filter((product)=>product.category===itemCollection.value)
-      setProducts(arrFilterByCollection);
-      console.log('arrFilterByCollection', arrFilterByCollection);
-    }
+  // Add amount to products
+  const productsWithAmount = products.map((ans)=> ( {...ans, 'amount': 0} ))
   
+  useEffect(()=>{
+    console.log('listProductInCart', listProductInCart);
+  },[listProductInCart])
+  
+
+  const storeValues = {
+    category,
+    setCategory,
+    sort,
+    setSort,
   }
 
-  const handleAddToCart=(item)=>{
-    console.log('handleAddToCart item=',item);
-    setCounterCartItems(counterCartItems+item);
-  }
-  
+  const productsValue = {
+    allProducts: productsWithAmount, 
+    setProducts};
+
+  const cartValue = {
+    listProductInCart, 
+    setListProductInCart, 
+    amount, 
+    setAmount };
+
+
   return (
-    <div>
-      <Nav handleChangeFilter={handleChangeFilter} counterCartItems={counterCartItems}/>
-      <Products allProducts={products} handleAddToCart={handleAddToCart}/>
-    </div>
+    <Router>
+      <StoreContext.Provider value={storeValues}>
+        <ProductsContext.Provider value={productsValue}>
+          <CartProductsContext.Provider value={cartValue}>
+            
+            <div>
+              <Nav />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/products/:productId" element={<ProductDetail />} />
+                <Route path="/query" element={<QueryUrl />} />
+              </Routes>
+            </div>
+
+          </CartProductsContext.Provider>
+        </ProductsContext.Provider>
+      </StoreContext.Provider>
+    </Router>
   );
 }
 

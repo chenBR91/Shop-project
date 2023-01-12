@@ -5,10 +5,8 @@ import './product.css'
 //import CartProductsContext from '../../CartProductsContext'
 import ProductsContext from '../../ProductsContext'
 
-function Product({imageUrl, title, price, id, index, amount}) {
+function Product({imageUrl, title, price, id, amount}) {
 
-  //const { amount } = useContext(CartProductsContext);
-  const { allProducts } = useContext(ProductsContext)
 
   return (  
     <div className="product-card">

@@ -16,7 +16,6 @@ function App() {
   const [counterCartItems, setCounterCartItems] = useState(0);
   const [category, setCategory] = useState('all Products');
   const [sort, setSort] = useState(null);
-  const [amount, setAmount] = useState(0);
   const [listProductInCart, setListProductInCart] = useState([]) 
   
   let countAttemptLoadProducts = 0;
@@ -30,7 +29,8 @@ function App() {
     try{
       const res = await fetch(url);
       const answer = await res.json();
-      setProducts(answer);
+      const productsWithAmount = answer.map((ans)=> ( {...ans, 'amount': 0} ))
+      setProducts(productsWithAmount);
       countAttemptLoadProducts = 0;
     }catch(err){
       if(countAttemptLoadProducts < 3) {
@@ -43,8 +43,9 @@ function App() {
   }
 
   // Add amount to products
-  const productsWithAmount = products.map((ans)=> ( {...ans, 'amount': 0} ))
+  // const productsWithAmount = products.map((ans)=> ( {...ans, 'amount': 0} ))
   
+
   useEffect(()=>{
     console.log('listProductInCart', listProductInCart);
   },[listProductInCart])
@@ -54,18 +55,15 @@ function App() {
     category,
     setCategory,
     sort,
-    setSort,
-  }
+    setSort }
 
   const productsValue = {
-    allProducts: productsWithAmount, 
+    allProducts: products, 
     setProducts};
 
   const cartValue = {
     listProductInCart, 
-    setListProductInCart, 
-    amount, 
-    setAmount };
+    setListProductInCart };
 
 
   return (

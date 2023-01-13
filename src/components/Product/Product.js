@@ -2,11 +2,8 @@ import React, {useContext, useState} from 'react'
 import AddCart from '../Carts/AddCart'
 import { Link } from 'react-router-dom'
 import './product.css'
-//import CartProductsContext from '../../CartProductsContext'
-import ProductsContext from '../../ProductsContext'
 
 function Product({imageUrl, title, price, id, amount}) {
-
 
   return (  
     <div className="product-card">

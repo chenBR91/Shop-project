@@ -3,12 +3,9 @@ import ProductsContext from './ProductsContext';
 import StoreContext from './StoreContext';
 import CartProductsContext from './CartProductsContext';
 import './App.css';
-import Nav from './components/Nav/Nav';
-import About from './pages/About/About.js';
-import Home from './pages/Home/Home';
-import ProductDetail from './pages/ProductDetail/ProductDetail';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import QueryUrl from './pages/Further/QueryUrl';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Loding from './components/Loding/Loding';
+import Main from './pages/Main';
 
 function App() {
   const [itemCollection, setItemCollection] = useState({});
@@ -17,6 +14,7 @@ function App() {
   const [category, setCategory] = useState('all Products');
   const [sort, setSort] = useState(null);
   const [listProductInCart, setListProductInCart] = useState([]) 
+  const [isLoding, setIsLoding] = useState(true);
   
   let countAttemptLoadProducts = 0;
 
@@ -31,6 +29,7 @@ function App() {
       const answer = await res.json();
       const productsWithAmount = answer.map((ans)=> ( {...ans, 'amount': 0} ))
       setProducts(productsWithAmount);
+      setIsLoding(false);
       countAttemptLoadProducts = 0;
     }catch(err){
       if(countAttemptLoadProducts < 3) {
@@ -42,9 +41,6 @@ function App() {
     }
   }
 
-  // Add amount to products
-  // const productsWithAmount = products.map((ans)=> ( {...ans, 'amount': 0} ))
-  
 
   useEffect(()=>{
     console.log('listProductInCart', listProductInCart);
@@ -73,13 +69,11 @@ function App() {
           <CartProductsContext.Provider value={cartValue}>
             
             <div>
-              <Nav />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/products/:productId" element={<ProductDetail />} />
-                <Route path="/query" element={<QueryUrl />} />
-              </Routes>
+              {isLoding ? (
+                <Loding /> 
+                ) : (
+                  <Main />
+                )}
             </div>
 
           </CartProductsContext.Provider>

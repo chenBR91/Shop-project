@@ -27,3 +27,28 @@
     display: flex;
     justify-content: space-between;
   }
+
+
+  .buy {
+    display: flex;
+    justify-content: center;
+    border: 1px solid rgb(117, 117, 79);
+    padding: 25px;
+  }
+
+
+  /* for cart drawer */
+  .buy .btn-buy {
+    width: 85%;
+  }
+
+  .info-price {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 14px;
+  }
+
+  .btn-delete {
+    display: flex;
+    justify-content: space-around;
+  }

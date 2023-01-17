@@ -13,17 +13,19 @@ import { MdOutlinePayment } from "react-icons/md";
 // import { AiOutlineDelete } from "react-icons/ai";
 import { IoMdClose } from "react-icons/io";
 
+
 function TemporaryDrawer() {
   const { cartOpen, onClose } = useContext(DrawerContext);
   const { listProductInCart } = useContext(ProductsContext);
+
 
   const calculatePricePerProduct = (price, amount) => {
     return price * amount;
   };
 
-  const MediaCard = (product) => {
+  const MediaCard = ({product}) => {
     return (
-      <Card sx={{ width: 300 }}>
+      <Card>
         <Typography gutterBottom variant="h6" component="div">
           {product.title}
         </Typography>
@@ -46,33 +48,38 @@ function TemporaryDrawer() {
   const productsInCart = () => {
     return listProductInCart.map((productInCart, index) => (
       <div key={index} style={{ border: "1px solid red" }}>
-        {MediaCard(productInCart)}
+        <MediaCard product={productInCart} />
       </div>
     ));
   };
 
-  const showProductInCart = () => {
+  const BtnBuyNow = () => {
     return (
-          <div className="buy">
-            <Button
-              className="btn-buy"
-              variant="contained"
-              endIcon={<MdOutlinePayment />}
-            >
-              Buy now
-            </Button>
-          </div>
+      <div className="buy">
+        <Button
+          className="btn-buy"
+          variant="contained"
+          endIcon={<MdOutlinePayment />}
+        >
+          Buy now
+        </Button>
+      </div>
     )
   }
 
-  const test = () => {
+  const contentDrawer = () => {
     if(listProductInCart.length > 0) {
       return(
-        productsInCart()
+        <div>
+           {productsInCart()}
+           <BtnBuyNow />
+        </div>
       )
     } else {
       return(
-        <div>empty</div>
+        <div className="empty-cart">
+          <p>empty cart</p>
+        </div>
       )
     }
   }
@@ -81,21 +88,9 @@ function TemporaryDrawer() {
   return (
     <div>
       <Drawer variant="temporary" open={cartOpen} anchor={"right"}>
-        <div>
+        <div style={{width: '300px'}}>
           <Button onClick={onClose} size="medium" endIcon={<IoMdClose />}>Close</Button>
-          
-            {test()}
-        {/* {showProductInCart()} */}
-          {/* <div className="buy">
-            <Button
-              className="btn-buy"
-              variant="contained"
-              endIcon={<MdOutlinePayment />}
-            >
-              Buy now
-            </Button>
-          </div> */}
-       
+            {contentDrawer()}
         </div>
       </Drawer>
     </div>
@@ -103,4 +98,3 @@ function TemporaryDrawer() {
 }
 
 export default TemporaryDrawer;
-// MdOutlinePayment

@@ -52,3 +52,12 @@
     display: flex;
     justify-content: space-around;
   }
+
+  .show-amount {
+    background-color: #c1b9b9;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+  }

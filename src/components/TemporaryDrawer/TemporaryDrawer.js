@@ -6,11 +6,11 @@ import DrawerContext from "../../DrawerContext";
 import ProductsContext from "../../ProductsContext";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
-// import AddCart from "../Carts/AddCart";
+import AddCart from "../Carts/AddCart";
 
 import { Button } from "@mui/material";
 import { MdOutlinePayment } from "react-icons/md";
-import { AiOutlineDelete } from "react-icons/ai";
+// import { AiOutlineDelete } from "react-icons/ai";
 import { IoMdClose } from "react-icons/io";
 
 function TemporaryDrawer() {
@@ -37,11 +37,8 @@ function TemporaryDrawer() {
           </span>
         </div>
         <div className="btn-delete">
-          <Button variant="outlined" startIcon={<AiOutlineDelete />}>
-            Delete
-          </Button>
+          <AddCart situation={"decrement"} id={product.id} style={{bgColor: 'rgb(190, 000, 107)', width: '45%'}} selectBtn={"specialForDrawer"}>Delete</AddCart>
         </div>
-        {/* <AddCart situation={"decrement"} id={product.id} style={{bgColor: 'rgb(190, 000, 107)', width: '45%'}}>Delete</AddCart> */}
       </Card>
     );
   };
@@ -54,12 +51,8 @@ function TemporaryDrawer() {
     ));
   };
 
-  return (
-    <div>
-      <Drawer variant="temporary" open={cartOpen} anchor={"right"}>
-        <div>
-          <Button onClick={onClose} size="medium" endIcon={<IoMdClose />}>Close</Button>
-          {productsInCart()}
+  const showProductInCart = () => {
+    return (
           <div className="buy">
             <Button
               className="btn-buy"
@@ -69,6 +62,40 @@ function TemporaryDrawer() {
               Buy now
             </Button>
           </div>
+    )
+  }
+
+  const test = () => {
+    if(listProductInCart.length > 0) {
+      return(
+        productsInCart()
+      )
+    } else {
+      return(
+        <div>empty</div>
+      )
+    }
+  }
+
+
+  return (
+    <div>
+      <Drawer variant="temporary" open={cartOpen} anchor={"right"}>
+        <div>
+          <Button onClick={onClose} size="medium" endIcon={<IoMdClose />}>Close</Button>
+          
+            {test()}
+        {/* {showProductInCart()} */}
+          {/* <div className="buy">
+            <Button
+              className="btn-buy"
+              variant="contained"
+              endIcon={<MdOutlinePayment />}
+            >
+              Buy now
+            </Button>
+          </div> */}
+       
         </div>
       </Drawer>
     </div>

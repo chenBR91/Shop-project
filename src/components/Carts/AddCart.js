@@ -1,8 +1,9 @@
 import React, {useContext, useState, useEffect} from 'react';
 import './AddCart.css';
 import ProductsContext from '../../ProductsContext';
+import { Button } from '@mui/material';
 
-function AddCart({children, style, situation, id}) {
+function AddCart({children, style, situation, id, selectBtn}) {
   const {allProducts, setProducts, listProductInCart, setListProductInCart} = useContext(ProductsContext)
 
   const handleIncOrDec = () => {
@@ -30,7 +31,16 @@ function AddCart({children, style, situation, id}) {
 
   return (
     <>
-      <button onClick={handleIncOrDec} className='btn-add-cart' style={{background:style.bgColor, color:style.color, width:style.width}}>{children}</button>
+      {selectBtn === 'regularBtn' ? (
+        <button onClick={handleIncOrDec} className='btn-add-cart' style={{background:style.bgColor, color:style.color, width:style.width}}>{children}</button>
+      ) : selectBtn === 'specialForDrawer' ? (
+        <Button onClick={handleIncOrDec} variant="outlined">{children}</Button>
+      ) : selectBtn === 'buttonGroup' ?(
+        <Button onClick={handleIncOrDec} variant="outlined">{children}</Button>
+      ): (
+        <p></p>
+      )
+    }     
     </>
   )
 }

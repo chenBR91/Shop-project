@@ -61,3 +61,17 @@
     flex-wrap: wrap;
     align-content: center;
   }
+
+  .empty-cart {
+    border: 0px solid red;
+  }
+
+  .empty-cart p {
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    font-size: larger;
+    font-weight: 500;
+  }

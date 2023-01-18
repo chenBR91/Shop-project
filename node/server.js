@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import productsServer from "./data/productsServer.js";
 
+
 const PORT = 8000;
-const i =5;
 
 const app = express();
 app.use(express.json())

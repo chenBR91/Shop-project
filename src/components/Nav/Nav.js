@@ -9,8 +9,8 @@ import './nav.css';
 function Nav() {
   
   return (
-    <>
-      <nav className="product-filter">
+    <div className='middle-element'>
+      <nav className="products product-filter">
         <div className="product-menu">
           <h1><Link to='/' className='menu-link'>Products</Link></h1>
           <h1><Link to='/about' className='menu-link'>About</Link></h1>
@@ -25,7 +25,7 @@ function Nav() {
               <SortBy />
           </div>
       </nav>
-    </>
+    </div>
   )
 }
 

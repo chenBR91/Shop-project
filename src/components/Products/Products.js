@@ -2,7 +2,8 @@ import React, { useContext } from 'react'
 import Product from '../Product/Product'
 import ProductsContext from '../../ProductsContext'
 import StoreContext from '../../StoreContext';
-import CartProductsContext from '../../CartProductsContext';
+// import CartProductsContext from '../../CartProductsContext';
+import './products.css'
 
 function Products() {
   const { allProducts } = useContext(ProductsContext);
@@ -11,7 +12,7 @@ function Products() {
   const filterArray = category === 'all Products' ? allProducts : allProducts.filter((filterProduct)=>filterProduct.category === category)
   
   return (
-    <>
+    <div className="middle-element">
         <section className="products">
         {filterArray.map((product, index)=>
             <Product 
@@ -27,7 +28,7 @@ function Products() {
         )}
 
         </section>
-    </>
+    </div>
   )
 }
 

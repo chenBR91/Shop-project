@@ -4,13 +4,23 @@ import ProductsContext from '../../ProductsContext';
 import { Button } from '@mui/material';
 
 function AddCart({children, style, situation, id, selectBtn}) {
-  const {allProducts, setProducts, listProductInCart, setListProductInCart} = useContext(ProductsContext)
+  const {allProducts, setProducts, listProductInCart, setListProductInCart, counterItemInCart, setCounterItemInCart} = useContext(ProductsContext)
+
+  const handdleUpdateCounterCart = (situation) => {
+    if(situation === 'increment') {
+      setCounterItemInCart(counterItemInCart + 1);
+    }
+    else if(situation === 'decrement' && counterItemInCart > 0) {
+      setCounterItemInCart(counterItemInCart - 1);
+    }
+  }
 
   const handleIncOrDec = () => {
     if(situation === 'increment') {
       const getIndex = allProducts.findIndex((product) => product.id === id)
       allProducts[getIndex]['amount'] += 1;
       setProducts([...allProducts]);
+      handdleUpdateCounterCart(situation)
       const existProduct = listProductInCart.findIndex((product) => product.id === id )
       if(existProduct === -1) {
         setListProductInCart([...listProductInCart, allProducts[getIndex]]);
@@ -21,6 +31,7 @@ function AddCart({children, style, situation, id, selectBtn}) {
       if(allProducts[getIndex]['amount'] > 0) {
         allProducts[getIndex]['amount'] -= 1;
         setProducts([...allProducts]);
+        handdleUpdateCounterCart(situation);
       }
       if(allProducts[getIndex]['amount'] === 0){
         const newListInCart = listProductInCart.filter((product) => product.id !== id );

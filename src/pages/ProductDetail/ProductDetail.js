@@ -29,8 +29,9 @@ function ProductDetail() {
 useEffect(()=>{console.log(singleProduct)},[singleProduct])
 
  return (
-    <div className='frame'>
-        <h1>{category}</h1>
+    <div className='middle-element frame'>
+      <div className='products'>
+      <h1>{category}</h1>
         <div className='box'>
           <div className='main-img'>
             <img src={image} alt={image} />
@@ -43,6 +44,7 @@ useEffect(()=>{console.log(singleProduct)},[singleProduct])
             </div>
           </div>
         </div>
+      </div>
     </div>
   )
 }

@@ -7,6 +7,8 @@ import QueryUrl from "./Further/QueryUrl";
 import Home from "./Home/Home";
 import ProductDetail from "./ProductDetail/ProductDetail";
 import DrawerContext from ".././DrawerContext";
+import Header from "../components/Header/Header";
+import HeaderFilterSearch from "../components/HeaderFilterSearch/HeaderFilterSearch";
 
 function Main() {
   const [cartOpen, setCartOpen] = useState(false);
@@ -25,15 +27,19 @@ function Main() {
     <div>
       <DrawerContext.Provider value={drawerValue}>
         <TemporaryDrawer />
-        <Nav />
-      </DrawerContext.Provider>
+        <Header />
+        <HeaderFilterSearch />
+        {/* <Nav /> */}
+      
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/products/:productId" element={<ProductDetail />} />
+          <Route path="/query" element={<QueryUrl />} />
+        </Routes>
+        
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/products/:productId" element={<ProductDetail />} />
-        <Route path="/query" element={<QueryUrl />} />
-      </Routes>
+      </DrawerContext.Provider>
     </div>
   );
 }

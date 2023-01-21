@@ -17,7 +17,9 @@ function About() {
   }
 
   return (
-    <div>About</div>
+    <div className='middle-element'>
+      <div className='products'>About</div>
+    </div>
   )
 }
 

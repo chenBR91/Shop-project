@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import ProductsContext from "./ProductsContext";
 import StoreContext from "./StoreContext";
-import CartProductsContext from "./CartProductsContext";
+// import CartProductsContext from "./CartProductsContext";
 import "./App.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import Loding from "./components/Loding/Loding";
 import Main from "./pages/Main";
 
 function App() {
-  const [itemCollection, setItemCollection] = useState({});
   const [products, setProducts] = useState([]);
-  const [counterCartItems, setCounterCartItems] = useState(0);
+  const [counterItemInCart, setCounterItemInCart] = useState(0);
   const [category, setCategory] = useState("all Products");
-  const [sort, setSort] = useState(null);
+  const [sortFilterByPrice, setSortFilterByPrice] = useState([]);
   const [listProductInCart, setListProductInCart] = useState([]);
   const [isLoding, setIsLoding] = useState(true);
 
@@ -31,6 +30,7 @@ function App() {
       const productsWithAmount = answer['data']
       .map((ans) => ({ ...ans, amount: 0 }));
       setProducts(productsWithAmount);
+      setSortFilterByPrice(productsWithAmount);
       setIsLoding(false);
       countAttemptLoadProducts = 0;
     } catch (err) {
@@ -50,15 +50,17 @@ function App() {
   const storeValues = {
     category,
     setCategory,
-    sort,
-    setSort,
+    sortFilterByPrice,
+    setSortFilterByPrice,
   };
 
   const productsValue = {
     allProducts: products,
     setProducts,
     listProductInCart,
-    setListProductInCart
+    setListProductInCart,
+    counterItemInCart,
+    setCounterItemInCart
   };
 
   

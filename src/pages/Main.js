@@ -34,7 +34,7 @@ function Main() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/products/:productId" element={<ProductDetail />} />
+          <Route path="/product/:productId" element={<ProductDetail />} />
           <Route path="/query" element={<QueryUrl />} />
         </Routes>
         

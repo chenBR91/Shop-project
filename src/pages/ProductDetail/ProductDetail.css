@@ -1,35 +1,11 @@
-
-.frame {
-    padding: 15px;
-}
-
-.box {
-    border: 0px solid red;
-    display: flex;
-    justify-content: space-evenly;
-    padding: 15px;
-}
-
-.main-img {
-    display: flex;
-    border: 0px solid blue;
-    width: 40%;
-}
-
-.main-img img {
+.item {
+    height: 100%;
     width: 100%;
 }
 
-.explain {
+.btn-add {
+    height: 70px;
     display: flex;
-    justify-content: space-evenly;
-    align-content: space-around;
-    flex-wrap: wrap;
-    flex-direction: column;
-    border: 0px solid rgb(48, 170, 170);
-    width: 50%;
-}
-
-.btn-add-cart {
-    width: 50%;
+    justify-content: center;
+    align-items: end;
 }

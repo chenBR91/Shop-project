@@ -18,6 +18,18 @@ app.get('/', async(req, res) => {
 })
 
 
+app.get('/product/:id', async(req, res) => {
+    console.log('id', req.params.id);
+    try {
+        const getProductDetail = productsServer.filter((product) => product.id === Number(req.params.id));
+        res.send({data: getProductDetail});
+    } 
+    catch(err) {
+        console.log('err', err);
+    }
+})
+
+
 app.listen(PORT, () => {
     console.log(`Server lisiting on port ${PORT}`);
 })

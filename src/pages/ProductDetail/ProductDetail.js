@@ -1,9 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import { useParams, useLocation } from 'react-router-dom'
 import './ProductDetail.css';
-import AddCart from '../../components/Carts/AddCart';
 
-// const location = useLocation();
+// Metrial Ui //
+import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import { green, red } from '@mui/material/colors';
+import { Typography } from '@mui/material';
+import AddCart from '../../components/Carts/AddCart';
 
 function ProductDetail() {
   const params = useParams();
@@ -15,35 +21,49 @@ function ProductDetail() {
   }, [])
 
   const getProductId = async() => {
-    const url = `https://fakestoreapi.com/products/${paramsId}`;
+    //const url = `https://fakestoreapi.com/products/${paramsId}`;
+    const url = `http://localhost:8000/product/${paramsId}`;
     try {
       const res = await fetch(url);
       const product = await res.json();
-      setSingleProduct(product);
+      setSingleProduct(product['data'][0]);
     } catch(err) {
       console.log('err', err);
     }
   }
 
   const {image, price, title, category} = singleProduct;
-useEffect(()=>{console.log(singleProduct)},[singleProduct])
+  useEffect(()=>{console.log(singleProduct)},[singleProduct])
+
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
 
  return (
     <div className='middle-element frame'>
       <div className='products'>
-      <h1>{category}</h1>
-        <div className='box'>
-          <div className='main-img'>
-            <img src={image} alt={image} />
-          </div>
-          <div className='explain'>
-            {title}
-            <p>Price: 88</p>
-            <div className='btn-add-cart'>
-              {/* <AddCart handleAddToCart={handleAddToCart} style={{bgColor:'rgb(107, 180, 00)', color:'white', width: '100%'}}>Add to cart</AddCart> */}
-            </div>
-          </div>
-        </div>
+        <Box sx={{ width: '100%'}}>
+        <Typography gutterBottom variant="h4">{title} </Typography>
+        <Grid container>
+          <Grid item xs={6}>
+            <Item className='item'>
+              <img src={singleProduct.image} alt={singleProduct.image} style={{width: '50%'}}/>
+            </Item>
+          </Grid>
+          <Grid item xs={6}>
+            <Item className='item'>
+              <div>{singleProduct.description}</div>
+              <div className='btn-add'>
+                <AddCart style={{bgColor: "green", color: 'white', width: '110px'}} situation={'increment'} id={singleProduct.id} selectBtn={'regularBtn'}>Add to cart</AddCart>
+              </div>
+            </Item>
+          </Grid>
+        </Grid>
+      </Box>
       </div>
     </div>
   )

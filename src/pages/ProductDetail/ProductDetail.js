@@ -21,7 +21,6 @@ function ProductDetail() {
   }, [])
 
   const getProductId = async() => {
-    //const url = `https://fakestoreapi.com/products/${paramsId}`;
     const url = `http://localhost:8000/product/${paramsId}`;
     try {
       const res = await fetch(url);

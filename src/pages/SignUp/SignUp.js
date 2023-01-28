@@ -15,7 +15,7 @@ function SignUp() {
   const [isEmailNote, setIsEmailNote] = useState(false);
   const [isPasswordNote, setIsPasswordNote] = useState(false);
   const [isReapetPasswordNote, setIsReapetPasswordNote] = useState(false);
-
+  const [isPasswordMatch, setIsPasswordMatch] = useState(false);
 
   useEffect(() => {
     console.log("email", email);
@@ -26,12 +26,36 @@ function SignUp() {
   const confirmInputs = () => {
     if (email === "") {
       setIsEmailNote(true);
+    } else {
+      setIsEmailNote(false);
     }
     if (password === "") {
       setIsPasswordNote(true);
+    } else {
+      setIsPasswordNote(false);
     }
     if (reapetPassword === "") {
       setIsReapetPasswordNote(true);
+    } else {
+      setIsReapetPasswordNote(false);
+    }
+
+    // check match password
+    if (password !== reapetPassword) {
+      setIsPasswordMatch(true);
+    } else {
+      setIsPasswordMatch(false);
+    }
+
+    if (
+      (isPasswordMatch &&
+        isReapetPasswordNote &&
+        isPasswordNote &&
+        isEmailNote) === false
+    ) {
+      return true;
+    } else {
+      return false;
     }
   };
 
@@ -53,23 +77,33 @@ function SignUp() {
     }
 
     if (inputField.inputField === "reapetPassword") {
-        if (isReapetPasswordNote === true) {
-          return <span className="field-note">* This field is required</span>;
-        } else {
-          return <span></span>;
-        }
+      if (isReapetPasswordNote === true) {
+        return <span className="field-note">* This field is required</span>;
+      } else {
+        return <span></span>;
       }
+    }
+
+    if (inputField.inputField === "thereMatch") {
+      if (isPasswordMatch === true) {
+        return (
+          <span className="field-note">* Reapet passwords do not match</span>
+        );
+      } else {
+        return <span></span>;
+      }
+    }
   };
 
   const handleSubmitSend = async (evt) => {
     evt.preventDefault();
-    console.log("event", evt);
     const userData = { email, password, reapetPassword };
-    confirmInputs();
-    const response = await axios.post(
-      "http://localhost:8000/api/users/create-user",
-      userData
-    );
+    if (confirmInputs()) {
+      const response = await axios.post(
+        "http://localhost:8000/api/users/create-user",
+        userData
+      );
+    }
   };
 
   const handleInput = (e) => {
@@ -114,7 +148,9 @@ function SignUp() {
               />
             </div>
             <div>
-              <p className="name-field">Password <DisplayNote inputField={"password"} /></p>
+              <p className="name-field">
+                Password <DisplayNote inputField={"password"} />
+              </p>
               <TextField
                 onChange={handleInput}
                 id="password-field"
@@ -125,7 +161,9 @@ function SignUp() {
               />
             </div>
             <div>
-              <p className="name-field">Reapet Password <DisplayNote inputField={"reapetPassword"} /></p>
+              <p className="name-field">
+                Reapet Password <DisplayNote inputField={"reapetPassword"} />
+              </p>
               <TextField
                 onChange={handleInput}
                 id="reapet-password-field"
@@ -134,6 +172,7 @@ function SignUp() {
                 variant="outlined"
                 fullWidth
               />
+              <DisplayNote inputField={"thereMatch"} />
             </div>
 
             <Button

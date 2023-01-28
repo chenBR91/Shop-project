@@ -9,6 +9,7 @@ import ProductDetail from "./ProductDetail/ProductDetail";
 import DrawerContext from ".././DrawerContext";
 import Header from "../components/Header/Header";
 import HeaderFilterSearch from "../components/HeaderFilterSearch/HeaderFilterSearch";
+import SignUp from "./SignUp/SignUp";
 
 function Main() {
   const [cartOpen, setCartOpen] = useState(false);
@@ -34,8 +35,9 @@ function Main() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/product/:productId" element={<ProductDetail />} />
+          <Route path="/api/products/productDetail/:productId" element={<ProductDetail />} />
           <Route path="/query" element={<QueryUrl />} />
+          <Route path="/sign-up" element={<SignUp />} />
         </Routes>
         
 

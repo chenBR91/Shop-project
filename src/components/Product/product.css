@@ -17,17 +17,31 @@
   }
 
   .product-info {
-    margin-top: auto;
+    /* margin-top: auto; */
     padding-top: 20px;
     text-align: center;
   }
 
   .product-btn {
+    margin-top: auto;
     border: 1px solid rgb(224, 133, 59);
     display: flex;
     justify-content: space-between;
   }
 
+  .info-btn-price {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    font-size: larger;
+    font-weight: 500;
+  }
 
   .buy {
     display: flex;

@@ -39,7 +39,7 @@ function TemporaryDrawer() {
           </span>
         </div>
         <div className="btn-delete">
-          <AddCart situation={"decrement"} id={product.id} style={{bgColor: 'rgb(190, 000, 107)', width: '45%'}} selectBtn={"specialForDrawer"}>Delete</AddCart>
+          <AddCart situation={"decrement"} id={product._id} style={{bgColor: 'rgb(190, 000, 107)', width: '45%'}} selectBtn={"specialForDrawer"}>Delete</AddCart>
         </div>
       </Card>
     );

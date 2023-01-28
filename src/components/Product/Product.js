@@ -15,13 +15,12 @@ function Product({ imageUrl, title, price, id, amount, index }) {
   return (
     <div className="product-card">
       <div className="product-image">
-        <Link to={`product/${id}`}>
+        <Link to={`api/products/productDetail/${id}`}>
           <img src={imageUrl} alt={imageUrl} />
         </Link>
       </div>
       <div className="product-info">
         <h5>{title}</h5>
-        <h6>${price}</h6>
       </div>
 
       {/* <ButtonGroup
@@ -40,17 +39,21 @@ function Product({ imageUrl, title, price, id, amount, index }) {
           <AddCart situation={"decrement"} id={id} style={{bgColor: 'rgb(190, 000, 107)', width: '45%'}} selectBtn={"regularBtn"}>Delete</AddCart>
       </div> */}
 
-      <div className="product-btn">
-        <ButtonGroup
-          variant="outlined"
-          aria-label="small button group"
-          color="inherit"
-        >
-          <AddCart situation={"increment"} id={id} style={{bgColor: 'rgb(190, 000, 107)', width: '45%'}} selectBtn={"buttonGroup"} > <AiOutlinePlus /></AddCart>
-          <p className="show-amount" style={{  }}>{amount}</p>
-          <AddCart situation={"decrement"} id={id} style={{bgColor: 'rgb(190, 000, 107)', width: '45%'}} selectBtn={"buttonGroup"} > <AiOutlineMinus /></AddCart>
-        </ButtonGroup>
+      <div className="info-btn-price">
+        <div className="price">${price}</div>
+        <div className="product-btn">
+          <ButtonGroup
+            variant="outlined"
+            aria-label="small button group"
+            color="inherit"
+          >
+            <AddCart situation={"increment"} id={id} style={{bgColor: 'rgb(190, 000, 107)', width: '45%'}} selectBtn={"buttonGroup"} > <AiOutlinePlus /></AddCart>
+            <p className="show-amount" style={{  }}>{amount}</p>
+            <AddCart situation={"decrement"} id={id} style={{bgColor: 'rgb(190, 000, 107)', width: '45%'}} selectBtn={"buttonGroup"} > <AiOutlineMinus /></AddCart>
+          </ButtonGroup>
+        </div>
       </div>
+      
     </div>
   );
 }

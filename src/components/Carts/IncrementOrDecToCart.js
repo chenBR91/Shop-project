@@ -6,10 +6,10 @@ const IncrementOrDecToCart = (situation, id) => {
   debugger
   const {allProducts, setProducts, listProductInCart, setListProductInCart} = useContext(ProductsContext)  
   if(situation === 'increment') {
-    const getIndex = allProducts.findIndex((product) => product.id === id)
+    const getIndex = allProducts.findIndex((product) => product._id === id)
     allProducts[getIndex]['amount'] += 1;
     setProducts([...allProducts]);
-    const existProduct = listProductInCart.findIndex((product) => product.id === id )
+    const existProduct = listProductInCart.findIndex((product) => product._id === id )
     if(existProduct === -1) {
       setListProductInCart([...listProductInCart, allProducts[getIndex]]);
     }

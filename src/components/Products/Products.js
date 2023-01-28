@@ -22,7 +22,7 @@ function Products() {
              title={product.title} 
              price={product.price}
              category={product.category}
-             id={product.id}
+             id={product._id}
              amount={product.amount}
             />
         )}

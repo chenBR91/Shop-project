@@ -23,13 +23,15 @@ function App() {
 
   const uploadProductsApi = async () => {
     //const url = "https://fakestoreapi.com/products";
-    const urlServer = "http://localhost:8000";
+    //const urlServer = "http://localhost:8000";
+    const urlServer = "http://localhost:8000/api/products/all-products";
     try {
       const res = await fetch(urlServer);
       const answer = await res.json();
-      const productsWithAmount = answer['data']
+      const productsWithAmount = answer
       .map((ans) => ({ ...ans, amount: 0 }));
       setProducts(productsWithAmount);
+      console.log('product', products);
       setSortFilterByPrice(productsWithAmount);
       setIsLoding(false);
       countAttemptLoadProducts = 0;

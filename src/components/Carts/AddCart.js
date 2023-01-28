@@ -17,24 +17,24 @@ function AddCart({children, style, situation, id, selectBtn}) {
 
   const handleIncOrDec = () => {
     if(situation === 'increment') {
-      const getIndex = allProducts.findIndex((product) => product.id === id)
+      const getIndex = allProducts.findIndex((product) => product._id === id)
       allProducts[getIndex]['amount'] += 1;
       setProducts([...allProducts]);
       handdleUpdateCounterCart(situation)
-      const existProduct = listProductInCart.findIndex((product) => product.id === id )
+      const existProduct = listProductInCart.findIndex((product) => product._id === id )
       if(existProduct === -1) {
         setListProductInCart([...listProductInCart, allProducts[getIndex]]);
       }
 
     } else if(situation === 'decrement') {
-      const getIndex = allProducts.findIndex((product) => product.id === id)
+      const getIndex = allProducts.findIndex((product) => product._id === id)
       if(allProducts[getIndex]['amount'] > 0) {
         allProducts[getIndex]['amount'] -= 1;
         setProducts([...allProducts]);
         handdleUpdateCounterCart(situation);
       }
       if(allProducts[getIndex]['amount'] === 0){
-        const newListInCart = listProductInCart.filter((product) => product.id !== id );
+        const newListInCart = listProductInCart.filter((product) => product._id !== id );
         setListProductInCart(newListInCart);
       }
     }

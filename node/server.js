@@ -16,9 +16,16 @@ app.get("/api/products/all-products", async (req, res) => {
   models.Products.find((err, obj) => {
     if (err) console.log(err._message);
     res.send(obj);
-    console.log("obj", obj);
   });
 });
+
+app.get("/api/products/productDetail/:id", async (req, res) => {
+  const {id} = req.params;
+  models.Products.find({_id: id}, (err, obj) => {
+    if(err)console.log(err._message);
+    res.send(obj);
+  })
+})
 
 // run script only once with postman api for database initilization
 app.post("/api/products/create-all-products", async (req, res) => {
@@ -42,6 +49,13 @@ app.post("/api/products/create-all-products", async (req, res) => {
   });
   res.send(getAllProducts);
 });
+
+
+app.post("/api/users/create-user", async (req, res) => {
+  const {email, password, reapetPassword} = req.body;
+  res.send({'email': email, 'password': password, 'reapetPassword': reapetPassword})
+  console.log({email, password, reapetPassword});
+})
 
 // basic API
 app.get("/about", async (req, res) => {

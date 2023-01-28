@@ -20,45 +20,6 @@ function Header() {
   const { counterItemInCart } = useContext(ProductsContext)
   const { onClose } = useContext( DrawerContext )
 
-  // const UserMenu = () => {
-  //   const [auth, setAuth] = React.useState(true);
-  //   const [anchorEl, setAnchorEl] = React.useState(null);
-
-  //   const handleChange = (event) => {
-  //     setAuth(event.target.checked);
-  //   };
-
-  //   const handleMenu = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  //   };
-
-  //   const handleClose = () => {
-  //     setAnchorEl(null);
-  //   };
-
-  //   return(
-  //     <Menu
-  //       id="menu-appbar"
-  //       anchorEl={anchorEl}
-  //       anchorOrigin={{
-  //         vertical: 'top',
-  //         horizontal: 'right',
-  //       }}
-  //       keepMounted
-  //       transformOrigin={{
-  //         vertical: 'top',
-  //         horizontal: 'right',
-  //       }}
-  //       open={Boolean(anchorEl)}
-  //       onClose={handleClose}
-  //     >
-  //       <MenuItem onClick={handleClose}>Profile</MenuItem>
-  //       <MenuItem onClick={handleClose}>My account</MenuItem>
-  //     </Menu>
-  //   )
-  // }
-
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" color="inherit">
@@ -76,8 +37,8 @@ function Header() {
             </Badge>
           </p>
           <Button color="inherit" onClick={onClose}>Cart</Button>
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Signup</Button>
+          <Button to="/sign-up" color="inherit">Login</Button>
+          <Link to="/sign-up" className='menu-link'>SignUp</Link>
         </Toolbar>
       </AppBar>
     </Box>

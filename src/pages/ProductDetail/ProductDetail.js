@@ -7,7 +7,6 @@ import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import { green, red } from '@mui/material/colors';
 import { Typography } from '@mui/material';
 import AddCart from '../../components/Carts/AddCart';
 
@@ -21,11 +20,12 @@ function ProductDetail() {
   }, [])
 
   const getProductId = async() => {
-    const url = `http://localhost:8000/product/${paramsId}`;
+    //const url = `http://localhost:8000/product/${paramsId}`;
+    const url = `http://localhost:8000/api/products/productDetail/${paramsId}`;
     try {
       const res = await fetch(url);
       const product = await res.json();
-      setSingleProduct(product['data'][0]);
+      setSingleProduct(product[0]);
     } catch(err) {
       console.log('err', err);
     }
